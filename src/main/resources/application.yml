@@ -10,17 +10,22 @@ spring:
         - id: productos-service
           uri: lb://productos-service
           predicates:
-            - Path=/productos/**
+            - Path=/productos, /productos/**
         - id: ordenes-service
           uri: lb://ordenes-service
           predicates:
-            - Path=/ordenes/**
+            - Path=/ordenes, /ordenes/**
         - id: pagos-service
           uri: lb://pagos-service
           predicates:
-            - Path=/pagos/**
+            - Path=/pagos, /pagos/**
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web: DEBUG
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka-server:8761/eureka/
